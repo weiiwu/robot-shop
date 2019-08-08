@@ -5,6 +5,14 @@ import styled from "styled-components";
 import { ButtonContainer } from "./Button";
 
 export default class Navbar extends Component {
+  state = {
+    isOpen: false
+  };
+
+  handleToggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
   render() {
     return (
       <NavWrapper className="navbar navbar-expand-sm navbar-dark px-sm-5">
@@ -22,25 +30,40 @@ export default class Navbar extends Component {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <div className="collapse navbar-collapse" id="navbarCollapse">
+        <div
+          className={
+            this.state.isOpen
+              ? "collapse navbar-collapse hide"
+              : "collapse navbar-collapse"
+          }
+          id="navbarCollapse"
+        >
           <ul className="navbar-nav align-items-center ml-auto">
             <li className="nav-item ml-5">
-              <Link to="/about" className="nav-link">
+              <Link
+                to="/about"
+                className="nav-link"
+                onClick={this.handleToggle}
+              >
                 about
               </Link>
             </li>
             <li className="nav-item ml-5">
-              <Link to="/" className="nav-link">
+              <Link to="/" className="nav-link" onClick={this.handleToggle}>
                 products
               </Link>
             </li>
             <li className="nav-item ml-5">
-              <Link to="/contact" className="nav-link">
+              <Link
+                to="/contact"
+                className="nav-link"
+                onClick={this.handleToggle}
+              >
                 contact
               </Link>
             </li>
             <li className="nav-item ml-5">
-              <Link to="/cart">
+              <Link to="/cart" onClick={this.handleToggle}>
                 <ButtonContainer>
                   <span className="mr-2">
                     <i className="fa fa-cart-arrow-down" /> cart
